@@ -3,29 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Love You Lakshita 💕</title>
+<title>For My Lakshita 💖</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:'Poppins',sans-serif;
 height:100vh;
 overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
+flex-direction:column;
+font-family:'Segoe UI',sans-serif;
 text-align:center;
 
-background:linear-gradient(45deg,#ff6b9d,#c44569,#f8b500,#ff9ff3,#54a0ff);
+background:linear-gradient(135deg,#ff4e8a,#ff7ac3,#ffb6e6);
 background-size:400% 400%;
-animation:bgMove 12s infinite alternate;
+animation:bgMove 10s infinite alternate;
 }
 
 @keyframes bgMove{
@@ -33,99 +28,93 @@ animation:bgMove 12s infinite alternate;
 100%{background-position:100% 50%;}
 }
 
-/* FLOATING HEARTS */
-.heart{
+/* BIG KISS ENTRY */
+.kiss{
 position:absolute;
-font-size:20px;
-animation:float 6s linear infinite;
-color:white;
+font-size:80vw;
+top:-200px;
+animation:drop 2s forwards;
 }
 
-@keyframes float{
-0%{transform:translateY(100vh);opacity:0;}
-20%{opacity:1;}
-100%{transform:translateY(-10vh);opacity:0;}
+@keyframes drop{
+0%{top:-200px; transform:scale(0.5);}
+100%{top:50%; transform:translateY(-50%) scale(1);}
 }
 
 /* MAIN TEXT */
-.container{
+.text{
+opacity:0;
+animation:fadeIn 2s forwards;
+animation-delay:2s;
+color:white;
 z-index:10;
-animation:pulse 3s infinite;
 }
 
-@keyframes pulse{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.05);}
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
-.love-text{
-font-family:'Dancing Script',cursive;
-font-size:8vw;
-color:white;
-text-shadow:0 0 20px #fff,0 0 30px #ff69b4;
+h1{
+font-size:4rem;
+text-shadow:0 0 20px white;
 }
 
-.name{
-font-size:4vw;
-color:white;
+p{
+font-size:1.5rem;
 margin-top:10px;
-text-shadow:0 0 15px #fff;
 }
 
 /* MUSIC BUTTON */
-.music{
-margin-top:30px;
+.btn{
+margin-top:20px;
 padding:12px 25px;
 border-radius:30px;
 background:rgba(255,255,255,0.2);
-backdrop-filter:blur(10px);
-cursor:pointer;
 color:white;
-font-size:18px;
-transition:0.3s;
+cursor:pointer;
 }
 
-.music:hover{
-transform:scale(1.1);
-background:rgba(255,255,255,0.3);
+/* HEART EXPLOSION */
+.heart{
+position:absolute;
+font-size:20px;
+animation:explode 1s forwards;
 }
+
+@keyframes explode{
+0%{
+transform:scale(1);
+opacity:1;
+}
+100%{
+transform:translate(var(--x),var(--y)) scale(0);
+opacity:0;
+}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-<div class="love-text">I loveee youuu 💖</div>
-<div class="name">Lakshita Sharma</div>
+<div class="kiss">💋</div>
 
-<div class="music" onclick="toggleMusic()">
-🎵 Tap to Play Music
-</div>
+<div class="text">
+<h1>I loveee youuu 💖</h1>
+<p>Lakshita Sharma</p>
+
+<div class="btn" onclick="toggleMusic()">🎵 Play Music</div>
 </div>
 
-<!-- YOUR MUSIC -->
-<audio id="bgMusic" loop>
+<audio id="music" loop>
 <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <script>
 
-/* FLOATING HEARTS */
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="💗";
-heart.style.left=Math.random()*100+"%";
-heart.style.fontSize=(15+Math.random()*20)+"px";
-heart.style.animationDuration=(4+Math.random()*4)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),6000);
-},300);
-
-/* MUSIC CONTROL */
-let music=document.getElementById("bgMusic");
+/* MUSIC */
+let music=document.getElementById("music");
 
 function toggleMusic(){
 if(music.paused){
@@ -134,6 +123,31 @@ music.play();
 music.pause();
 }
 }
+
+/* HEART EXPLOSION ON CLICK */
+document.addEventListener("click",function(e){
+
+for(let i=0;i<20;i++){
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+
+let x=(Math.random()*200-100)+"px";
+let y=(Math.random()*200-100)+"px";
+
+heart.style.setProperty('--x',x);
+heart.style.setProperty('--y',y);
+
+heart.style.left=e.clientX+"px";
+heart.style.top=e.clientY+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),1000);
+}
+
+});
 
 </script>
 
