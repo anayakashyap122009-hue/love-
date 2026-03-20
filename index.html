@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You Lakshita 💕</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+background:linear-gradient(45deg,#ff6b9d,#c44569,#f8b500,#ff9ff3,#54a0ff);
+background-size:400% 400%;
+animation:bgMove 12s infinite alternate;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+
+/* FLOATING HEARTS */
+.heart{
+position:absolute;
+font-size:20px;
+animation:float 6s linear infinite;
+color:white;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* MAIN TEXT */
+.container{
+z-index:10;
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+.love-text{
+font-family:'Dancing Script',cursive;
+font-size:8vw;
+color:white;
+text-shadow:0 0 20px #fff,0 0 30px #ff69b4;
+}
+
+.name{
+font-size:4vw;
+color:white;
+margin-top:10px;
+text-shadow:0 0 15px #fff;
+}
+
+/* MUSIC BUTTON */
+.music{
+margin-top:30px;
+padding:12px 25px;
+border-radius:30px;
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(10px);
+cursor:pointer;
+color:white;
+font-size:18px;
+transition:0.3s;
+}
+
+.music:hover{
+transform:scale(1.1);
+background:rgba(255,255,255,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="love-text">I loveee youuu 💖</div>
+<div class="name">Lakshita Sharma</div>
+
+<div class="music" onclick="toggleMusic()">
+🎵 Tap to Play Music
+</div>
+</div>
+
+<!-- YOUR MUSIC -->
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(15+Math.random()*20)+"px";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+},300);
+
+/* MUSIC CONTROL */
+let music=document.getElementById("bgMusic");
+
+function toggleMusic(){
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+}
+
+</script>
+
+</body>
+</html>
