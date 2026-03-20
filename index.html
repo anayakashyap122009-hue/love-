@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Lakshita 💖</title>
+<title>My Magical Love 💖</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -17,82 +17,58 @@ align-items:center;
 flex-direction:column;
 font-family:'Segoe UI',sans-serif;
 text-align:center;
-
-background:linear-gradient(135deg,#ff4e8a,#ff7ac3,#ffb6e6);
-background-size:400% 400%;
-animation:bgMove 10s infinite alternate;
+background:radial-gradient(circle,#ff6fa5,#ff99cc,#ffcce6);
 }
 
-@keyframes bgMove{
-0%{background-position:0% 50%;}
-100%{background-position:100% 50%;}
-}
-
-/* BIG KISS ENTRY */
+/* KISS */
 .kiss{
 position:absolute;
 font-size:80vw;
 top:-200px;
 animation:drop 2s forwards;
 }
-
 @keyframes drop{
-0%{top:-200px; transform:scale(0.5);}
-100%{top:50%; transform:translateY(-50%) scale(1);}
+100%{top:50%; transform:translateY(-50%);}
 }
 
-/* MAIN TEXT */
+/* TEXT */
 .text{
 opacity:0;
 animation:fadeIn 2s forwards;
 animation-delay:2s;
-color:white;
 z-index:10;
 }
-
 @keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+to{opacity:1;}
 }
 
-h1{
-font-size:4rem;
-text-shadow:0 0 20px white;
-}
-
-p{
-font-size:1.5rem;
-margin-top:10px;
-}
-
-/* MUSIC BUTTON */
-.btn{
-margin-top:20px;
-padding:12px 25px;
-border-radius:30px;
-background:rgba(255,255,255,0.2);
+/* WAVE TEXT */
+.wave span{
+display:inline-block;
+font-size:3rem;
 color:white;
-cursor:pointer;
+animation:wave 2s infinite;
+text-shadow:0 0 10px #fff,0 0 30px #ff1493;
+}
+@keyframes wave{
+50%{transform:translateY(-15px);}
+}
+.wave span:nth-child(n){
+animation-delay:calc(0.1s * var(--i));
 }
 
-/* HEART EXPLOSION */
+/* HEART */
 .heart{
 position:absolute;
 font-size:20px;
 animation:explode 1s forwards;
 }
-
 @keyframes explode{
-0%{
-transform:scale(1);
-opacity:1;
-}
-100%{
+to{
 transform:translate(var(--x),var(--y)) scale(0);
 opacity:0;
 }
 }
-
 </style>
 </head>
 
@@ -101,10 +77,35 @@ opacity:0;
 <div class="kiss">💋</div>
 
 <div class="text">
-<h1>I loveee youuu 💖</h1>
-<p>Lakshita Sharma</p>
-
-<div class="btn" onclick="toggleMusic()">🎵 Play Music</div>
+<h1 class="wave">
+<span style="--i:1">I</span>
+<span style="--i:2"> </span>
+<span style="--i:3">l</span>
+<span style="--i:4">o</span>
+<span style="--i:5">v</span>
+<span style="--i:6">e</span>
+<span style="--i:7"> </span>
+<span style="--i:8">y</span>
+<span style="--i:9">o</span>
+<span style="--i:10">u</span>
+<span style="--i:11"> </span>
+<span style="--i:12">L</span>
+<span style="--i:13">a</span>
+<span style="--i:14">k</span>
+<span style="--i:15">s</span>
+<span style="--i:16">h</span>
+<span style="--i:17">i</span>
+<span style="--i:18">t</span>
+<span style="--i:19">a</span>
+<span style="--i:20"> </span>
+<span style="--i:21">S</span>
+<span style="--i:22">h</span>
+<span style="--i:23">a</span>
+<span style="--i:24">r</span>
+<span style="--i:25">m</span>
+<span style="--i:26">a</span>
+<span style="--i:27"> 💖</span>
+</h1>
 </div>
 
 <audio id="music" loop>
@@ -112,42 +113,44 @@ opacity:0;
 </audio>
 
 <script>
+let music = document.getElementById("music");
 
-/* MUSIC */
-let music=document.getElementById("music");
-
-function toggleMusic(){
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-}
-
-/* HEART EXPLOSION ON CLICK */
-document.addEventListener("click",function(e){
-
-for(let i=0;i<20;i++){
-
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="💗";
-
-let x=(Math.random()*200-100)+"px";
-let y=(Math.random()*200-100)+"px";
-
-heart.style.setProperty('--x',x);
-heart.style.setProperty('--y',y);
-
-heart.style.left=e.clientX+"px";
-heart.style.top=e.clientY+"px";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),1000);
-}
-
+/* WAIT UNTIL AUDIO READY → THEN SKIP */
+music.addEventListener("loadedmetadata", () => {
+    music.currentTime = 15;
 });
+
+/* FIRST CLICK = PLAY (AUTOPLAY TRICK) */
+function startExperience(e){
+
+    music.currentTime = 15;
+    music.play();
+
+    /* HEART EFFECT */
+    for(let i=0;i<20;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💗";
+
+        let x=(Math.random()*200-100)+"px";
+        let y=(Math.random()*200-100)+"px";
+
+        heart.style.setProperty('--x',x);
+        heart.style.setProperty('--y',y);
+
+        heart.style.left=e.clientX+"px";
+        heart.style.top=e.clientY+"px";
+
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1000);
+    }
+
+    document.removeEventListener("click", startExperience);
+}
+
+/* trigger */
+document.addEventListener("click", startExperience);
+document.addEventListener("touchstart", startExperience);
 
 </script>
 
